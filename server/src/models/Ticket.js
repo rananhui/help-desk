@@ -5,7 +5,8 @@ const ticketSchema = new Schema({
     email: {type: String, required: true},
     subject: {type: String, required: true},
     description: {type: String, required: true},
-    status: {type: String, default: 'New'}
+    ticketId: {type: String, required: true},
+    status: {type: String, default: 'New'},
 })
 
 const ticketModel = model('ticket', ticketSchema)

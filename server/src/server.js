@@ -1,7 +1,7 @@
 import { config } from 'dotenv'
 import express from 'express'
 import { connect as mongoConnect } from 'mongoose'
-
+import ticketController from './controllers/ticketControllers'
 
 import Ticket from 'models/Ticket'
 
@@ -13,12 +13,26 @@ mongoConnect(process.env.MONGO_URI)
 
 const app = express()
 
-// To parse the request body
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 
 app.get('/test', (_, res) => res.send('This is a test'))
+
+app.post('/ticket', ticketController.generateTicketId, ticketController.submitTicket, 
+(req, res) => res.sendStatus(200))
+
+app.get('/tickets', ticketController.getTickets, 
+(req, res) => res.status(200).json(res.locals.tickets))
+
+app.post('/response', ticketController.respondToTicket, 
+(req, res) => res.sendStatus(200))
+
+app.patch('/status', ticketController.updateStatus, 
+(req, res) => res.sendStatus(200))
+
+
+
 
 // app.post('/addTodo', async (req, res) => {
 //     const { body } = req
