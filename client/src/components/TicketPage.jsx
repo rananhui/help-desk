@@ -39,6 +39,7 @@ const TicketPage = () => {
         .catch((err) => { console.log('An error has occurred: ', err)})
     }
     return (
+        
         <div className="ticket-container">
             <h1>Submit a Ticket</h1>
             <form className="ticket-form" onSubmit={handleSubmit}>
@@ -62,11 +63,12 @@ const TicketPage = () => {
                  onChange={handleChange}/>
                 <textarea 
                  name="description" 
+                 className="ticket-textarea"
                  placeholder="Please enter a detailed description of your issue" 
                  value={ticket.description} 
                  onChange={handleChange} 
                  rows="10" 
-                 cols="500"/>
+                 cols="50"/>
                 <button type="submit">Submit ticket</button>
             </form>
         </div>

@@ -95,7 +95,7 @@ const AdminPage = () => {
 
     return (
         <div className="admin-container">
-            <h1>Admin Page</h1>
+            <h1>Admin Panel</h1>
             {tickets.map(ticket => (
                 <Accordion key={ticket.ticketId} className="ticket-accordion">
                   <AccordionSummary expandIcon={<ExpandMoreIcon />} className="accordion-header">
