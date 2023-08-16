@@ -17,8 +17,6 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 
-app.get('/test', (_, res) => res.send('This is a test'))
-
 app.post('/ticket', ticketController.generateTicketId, ticketController.submitTicket, 
 (req, res) => res.sendStatus(200))
 
@@ -32,30 +30,6 @@ app.patch('/status', ticketController.updateStatus,
 (req, res) => res.sendStatus(200))
 
 
-
-
-// app.post('/addTodo', async (req, res) => {
-//     const { body } = req
-
-//     const newTodo = new Todo(body)
-//     const savedtodo = await newTodo.save()
-
-//     return res.send(savedtodo)
-// })
-
-// app.delete('/deleteTodo', async (req, res) => {
-//     const {
-//         body: { todoId },
-//     } = req
-
-//     const response = await Todo.findByIdAndDelete(todoId)
-//     return res.send(response)
-// })
-
-// app.get('/getAllTodos', async (_, res) => {
-//     const response = await Todo.find({})
-//     return res.send(response)
-// })
 
 app.use((req, res) => res.status(404).send('Page not found'));
 
