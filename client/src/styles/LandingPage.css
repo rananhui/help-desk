@@ -11,13 +11,13 @@
     display: inline-block;
     padding: 10px 20px;
     margin: 10px;
-    background-color: blue;
-    color: #fff;
+    background-color: #E5E5E5;
+    color: rgb(0, 0, 0);
     text-decoration: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
 body {
- background-color: aqua;
+ background-color: rgb(39, 184, 162);
 }

@@ -9,7 +9,7 @@
 .ticket-form {
     width: 500px;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 5px solid #E5E5E5;
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     display:flex;
@@ -20,7 +20,7 @@ input{
     width: 80%;
     padding: 10px; 
     margin-bottom: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #E5E5E5;
     border-radius: 3px;
     max-width: 80%;
     box-sizing: border-box;
@@ -31,7 +31,7 @@ input{
     width: 100%;
     padding: 10px; 
     margin-bottom: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #E5E5E5;
     border-radius: 3px;
     max-width: 80%;
     box-sizing: border-box; 
@@ -40,8 +40,8 @@ input{
 
 
 button {
-    background-color: blue;
-    color: white;
+    background-color: #E5E5E5;
+    color: rgb(0, 0, 0);
     border: none;
     border-radius: 3px;
     padding: 10px 20px;
