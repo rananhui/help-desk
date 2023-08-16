@@ -74,10 +74,10 @@ const TicketPage = () => {
                  cols="50"/>
                 <button type="submit" style={{ marginBottom: '10px' }}>Submit ticket</button>
                 {ticketPopup && (
-                        <Alert severity="success" onClose={() => {setTicketPopup(false)}}>
-                            Ticket sent!
-                        </Alert>
-                        )}
+                    <Alert severity="success" onClose={() => {setTicketPopup(false)}}>
+                        Ticket sent!
+                    </Alert>
+                )}
             </form>
         </div>
     )
