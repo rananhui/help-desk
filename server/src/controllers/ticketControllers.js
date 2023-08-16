@@ -22,7 +22,6 @@ ticketController.submitTicket = (req, res, next) => {
     const  ticketId  = res.locals.ticketId
     Ticket.create({name, email, subject, description, ticketId})
     .then((data) => {
-        console.log(data)
         return next()
     })
     .catch((err) => {
@@ -58,11 +57,8 @@ ticketController.respondToTicket = (req, res, next) => {
 ticketController.updateStatus = (req, res, next) => {
     const  ticketId  = req.body.ticketId
     const  newStatus  = req.body.status
-    console.log('this is ticketId: ', ticketId)
-    console.log('this is newStatus: ', newStatus)
     Ticket.updateOne({ticketId: ticketId}, {$set: {status: newStatus}}, {new: true})
     .then((data) => {
-        console.log(data)
         return next()
     })
     .catch((err) => {
