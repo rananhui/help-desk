@@ -1,9 +1,17 @@
+import React from 'react';
+import { Route, Routes } from 'react-router-dom'
+import LandingPage from './components/LandingPage'
+import TicketPage from './components/TicketPage'
+import AdminPage from './components/AdminPage'
 
-import './styles.css';
 function App() {
   return (
     <div>
-      <p>Test</p>
+      <Routes>
+        <Route exact path="/" element={<LandingPage/>}/>
+        <Route exact path="/create-ticket" element={<TicketPage/>}/>
+        <Route exact path="/admin-panel" element={<AdminPage/>}/>
+      </Routes>
     </div>
   );
 }
