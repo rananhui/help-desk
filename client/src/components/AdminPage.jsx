@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Accordion, AccordionSummary, AccordionDetails, Typography, Collapse, MenuItem, Select } from '@mui/material';
+import { Accordion, AccordionSummary, AccordionDetails, Typography, Collapse, MenuItem, Select, Alert, AlertTitle } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import '../styles/AdminPage.css';
 
 const AdminPage = () => {
     const [tickets, setTickets] = useState([])
+    const [responsePopup, setResponsePopup] = useState(false)
 
     useEffect(() => {
         fetchTickets()
@@ -22,9 +23,9 @@ const AdminPage = () => {
         })
         .then((response) => {
             if(response.ok){
-                console.log('Status updated successfully')
+                console.log('Assigned updated successfully')
             }else {
-                console.log('Status update failed')
+                console.log('Assigned update failed')
             }
         })
         .catch((err) => { console.log('An error has occurred: ', err)})
@@ -54,6 +55,27 @@ const AdminPage = () => {
 
         const updatedTickets = tickets.map(ticket => ticket.ticketId === currTicketId ? {...ticket, status: newStatus} : ticket)
         setTickets(updatedTickets)
+    }
+
+    const sendResponse = (e, currTicketId) => {
+        const textarea = e.target.parentNode.querySelector('.response-textarea')
+        const response = textarea.value
+        fetch('https://help-desk-w8aq.onrender.com/response', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ ticketId : currTicketId, response: response})
+        })
+        .then((response) => {
+            if(response.ok){
+                setResponsePopup(true)
+                textarea.value = ''
+            }else {
+                console.log('Email failed to send')
+            }
+        })
+        .catch((err) => { console.log('An error has occurred: ', err)})
     }
     
     
@@ -95,7 +117,33 @@ const AdminPage = () => {
                   </AccordionSummary>
                   <AccordionDetails>
                     <Collapse in={true} timeout="auto" unmountOnExit>
-                      {ticket.description}
+                    <div className="ticket-details">
+                      <Typography>
+                        Ticket created by: {ticket.name}
+                      </Typography>
+                      <Typography>
+                        Email: {ticket.email}
+                      </Typography>
+                      <Typography>
+                        Description: {ticket.description}
+                      </Typography>
+                      <textarea
+                        className="response-textarea"
+                        rows="10"
+                        cols="50"
+                        placeholder="Enter a response"
+                        value={ticket.adminResponse}
+                      />
+                    </div>
+                      <button onClick={(e) => sendResponse(e, ticket.ticketId)}
+                      style={{ marginBottom: '10px' }}>
+                        Submit response
+                      </button>
+                      {responsePopup && (
+                        <Alert severity="success" onClose={() => {setResponsePopup(false)}}>
+                            Email sent!
+                        </Alert>
+                        )}
                     </Collapse>
                   </AccordionDetails>
                 </Accordion>

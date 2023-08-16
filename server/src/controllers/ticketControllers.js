@@ -49,8 +49,7 @@ ticketController.getTickets = (req, res, next) => {
 }
 
 ticketController.respondToTicket = (req, res, next) => {
-    const { name, email, subject, response, ticketId } = req.body
-    console.log('Would normally send email here with body')
+    //send email
     return next()
 }
 

@@ -42,10 +42,31 @@ const TicketPage = () => {
         <div className="ticket-container">
             <h1>Submit a Ticket</h1>
             <form className="ticket-form" onSubmit={handleSubmit}>
-                <input type="text" name="name" placeholder="Name" value={ticket.name} onChange={handleChange}/>
-                <input type="text" name="email" placeholder="Email" value={ticket.email} onChange={handleChange}/>
-                <input type="text" name="subject" placeholder="Subject" value={ticket.subject} onChange={handleChange}/>
-                <textarea name="description" placeholder="Please enter a detailed description of your issue" value={ticket.description} onChange={handleChange}/>
+                <input 
+                 type="text" 
+                 name="name" 
+                 placeholder="Name" 
+                 value={ticket.name} 
+                 onChange={handleChange}/>
+                <input 
+                 type="text" 
+                 name="email" 
+                 placeholder="Email" 
+                 value={ticket.email} 
+                 onChange={handleChange}/>
+                <input 
+                 type="text" 
+                 name="subject" 
+                 placeholder="Subject" 
+                 value={ticket.subject} 
+                 onChange={handleChange}/>
+                <textarea 
+                 name="description" 
+                 placeholder="Please enter a detailed description of your issue" 
+                 value={ticket.description} 
+                 onChange={handleChange} 
+                 rows="10" 
+                 cols="500"/>
                 <button type="submit">Submit ticket</button>
             </form>
         </div>

@@ -44,4 +44,16 @@
     gap: 10px;
   }
   
+
+  .response-textarea {
+    max-width: 80%;
+    width: 100%;
+  }
+
+  .ticket-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+    max-width: 80%;
+  }
   
