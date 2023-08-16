@@ -1,5 +1,6 @@
 import { config } from 'dotenv'
 import express from 'express'
+import cors from 'cors'
 import { connect as mongoConnect } from 'mongoose'
 import ticketController from './controllers/ticketControllers'
 
@@ -15,6 +16,7 @@ const app = express()
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+app.use(cors())
 
 
 app.post('/ticket', ticketController.generateTicketId, ticketController.submitTicket, 
