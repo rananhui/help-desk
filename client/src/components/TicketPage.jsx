@@ -16,6 +16,7 @@ const TicketPage = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault()
+        console.log('ticket: ', ticket)
         fetch('https://help-desk-w8aq.onrender.com/ticket', {
             method: 'POST',
             headers: {
