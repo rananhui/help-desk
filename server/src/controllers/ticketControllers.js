@@ -70,6 +70,22 @@ ticketController.updateStatus = (req, res, next) => {
     })
 }
 
+ticketController.updateAssigned = (req, res, next) => {
+    const  ticketId  = req.body.ticketId
+    const  newAssigned  = req.body.assigned
+    Ticket.updateOne({ticketId: ticketId}, {$set: {assigned: newAssigned}}, {new: true})
+    .then((data) => {
+        return next()
+    })
+    .catch((err) => {
+        return next({
+            log: 'Express error occurred updateAssigned: ' + err,
+            status: 400,
+            message: { err: 'ticketController.updateAssigned: An error occurred' },
+        })
+    })
+}
+
 
 
 

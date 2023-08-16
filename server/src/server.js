@@ -31,6 +31,9 @@ app.post('/response', ticketController.respondToTicket,
 app.patch('/status', ticketController.updateStatus, 
 (req, res) => res.sendStatus(200))
 
+app.patch('/assigned', ticketController.updateAssigned, 
+(req, res) => res.sendStatus(200))
+
 
 
 app.use((req, res) => res.status(404).send('Page not found'));

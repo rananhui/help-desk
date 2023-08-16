@@ -1,18 +1,61 @@
 import React, { useState, useEffect } from 'react';
-import { Accordion, AccordionSummary, AccordionDetails, Typography, Collapse, MenuItem, Select } from '@mui/material'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import { Accordion, AccordionSummary, AccordionDetails, Typography, Collapse, MenuItem, Select } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import '../styles/AdminPage.css';
 
 const AdminPage = () => {
     const [tickets, setTickets] = useState([])
 
     useEffect(() => {
-        fetchTickets();
+        fetchTickets()
     }, [])
 
-    const handleAssignmentChange = (event) => {
-        event.stopPropagation();
-      };
+    const handleAssignmentChange = (e, currTicketId) => {
+        e.stopPropagation()
+        const newAssigned = e.target.textContent
+        fetch('https://help-desk-w8aq.onrender.com/assigned', {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ ticketId : currTicketId, assigned: newAssigned})
+        })
+        .then((response) => {
+            if(response.ok){
+                console.log('Status updated successfully')
+            }else {
+                console.log('Status update failed')
+            }
+        })
+        .catch((err) => { console.log('An error has occurred: ', err)})
+
+        const updatedTickets = tickets.map(ticket => ticket.ticketId === currTicketId ? {...ticket, assigned: newAssigned} : ticket)
+        setTickets(updatedTickets)
+    }
+    
+    const handleStatusChange = (e, currTicketId) => {
+        e.stopPropagation()
+        const newStatus = e.target.textContent
+        fetch('https://help-desk-w8aq.onrender.com/status', {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ ticketId : currTicketId, status: newStatus})
+        })
+        .then((response) => {
+            if(response.ok){
+                console.log('Status updated successfully')
+            }else {
+                console.log('Status update failed')
+            }
+        })
+        .catch((err) => { console.log('An error has occurred: ', err)})
+
+        const updatedTickets = tickets.map(ticket => ticket.ticketId === currTicketId ? {...ticket, status: newStatus} : ticket)
+        setTickets(updatedTickets)
+    }
+    
     
 
     const fetchTickets = () => {
@@ -39,14 +82,14 @@ const AdminPage = () => {
                         <Typography className="subject"> Subject: {ticket.subject}</Typography>
                     </div>
                     <div className="dropdowns">
-                        <Select onClick={handleAssignmentChange}>
-                            <MenuItem value="assigned">Assigned</MenuItem>
-                            <MenuItem value="unassigned">Unassigned</MenuItem>
+                        <Select value={ticket.assigned} onClick={(e) => handleAssignmentChange(e, ticket.ticketId)}>
+                            <MenuItem value="Assigned">Assigned</MenuItem>
+                            <MenuItem value="Unassigned">Unassigned</MenuItem>
                         </Select>
-                        <Select value={ticket.status}>
-                            <MenuItem value="new">New</MenuItem>
-                            <MenuItem value="in-progress">In Progress</MenuItem>
-                            <MenuItem value="resolved">Resolved</MenuItem>
+                        <Select value={ticket.status} onClick={(e) => handleStatusChange(e, ticket.ticketId)}>
+                            <MenuItem value="New">New</MenuItem>
+                            <MenuItem value="In Progress">In Progress</MenuItem>
+                            <MenuItem value="Resolved">Resolved</MenuItem>
                          </Select>
                      </div>
                   </AccordionSummary>

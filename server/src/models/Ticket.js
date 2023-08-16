@@ -7,6 +7,7 @@ const ticketSchema = new Schema({
     description: {type: String, required: true},
     ticketId: {type: String, required: true},
     status: {type: String, default: 'New'},
+    assigned: {type: String, default: 'Unassigned'}
 })
 
 const ticketModel = model('ticket', ticketSchema)
