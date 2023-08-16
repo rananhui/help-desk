@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Alert } from '@mui/material';
 import '../styles/TicketPage.css';
 
 const TicketPage = () => {
@@ -8,6 +9,8 @@ const TicketPage = () => {
         subject: '',
         description: ''
     })
+
+    const [ticketPopup, setTicketPopup] = useState(false)
 
     const handleChange = (e) => {
         const {name, value} = e.target
@@ -25,7 +28,7 @@ const TicketPage = () => {
         })
         .then((response) => {
             if(response.ok){
-                console.log('Ticket submitted successfully')
+                setTicketPopup(true)
                 setTicket({
                     name: '',
                     email: '',
@@ -69,7 +72,12 @@ const TicketPage = () => {
                  onChange={handleChange} 
                  rows="10" 
                  cols="50"/>
-                <button type="submit">Submit ticket</button>
+                <button type="submit" style={{ marginBottom: '10px' }}>Submit ticket</button>
+                {ticketPopup && (
+                        <Alert severity="success" onClose={() => {setTicketPopup(false)}}>
+                            Ticket sent!
+                        </Alert>
+                        )}
             </form>
         </div>
     )

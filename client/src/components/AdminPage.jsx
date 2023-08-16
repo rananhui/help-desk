@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Accordion, AccordionSummary, AccordionDetails, Typography, Collapse, MenuItem, Select, Alert, AlertTitle } from '@mui/material';
+import { Accordion, AccordionSummary, AccordionDetails, Typography, Collapse, MenuItem, Select, Alert } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import '../styles/AdminPage.css';
 
@@ -136,7 +136,7 @@ const AdminPage = () => {
                       />
                     </div>
                       <button onClick={(e) => sendResponse(e, ticket.ticketId)}
-                      style={{ marginBottom: '10px' }}>
+                      style={{ marginBottom: '10px', marginTop: '10px', }}>
                         Submit response
                       </button>
                       {responsePopup && (
